@@ -5,7 +5,8 @@
 this recipe will include following resources:
 
 1. one ec2 instance running gocd on docker containers
-2. one ec2 instance running docker registry
+2. one ec2 instance running docker registry e.g. 
+https://github.com/rasheedamir/aws-terraform/tree/master/modules/dockerhub
 3. one ebs backed volume that is mounted (attached) to the docker registry ec2 instance
 4. one bastion server (based on linux ami)
 5. deploy parameterized generic gocd job (baker or AMINATOR) that can take in dockerized apps; and build azure images
