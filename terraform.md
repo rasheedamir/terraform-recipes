@@ -16,3 +16,13 @@ This is how terraform works – It maintains a local state file where it keeps t
 a) resources defined in the template files by the developer.
 b) and the local state file.
 Now take the state file away and everything will be lost, it will again recreate all the resources that are defined in the .tf files. This means the state file needs to be shared between developers and that can lead to chaos!
+
+# Modules as Libraries
+
+A module defines its contract in two ways:
+
+Here are the inputs I can take
+Here are the outputs I give you
+
+Once you start moving some of your Terraform code into modules, you will be forced to create this contract for yourself.
+

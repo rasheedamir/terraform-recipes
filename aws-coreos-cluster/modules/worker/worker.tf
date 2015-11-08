@@ -1,6 +1,7 @@
 #
 # Docker worker autoscale group configurations
 #
+
 resource "aws_autoscaling_group" "worker" {
   name = "worker"
   availability_zones = [ "${var.worker_subnet_az_a}", "${var.worker_subnet_az_b}", "${var.worker_subnet_az_c}"]
@@ -36,6 +37,7 @@ resource "aws_launch_configuration" "worker" {
     volume_type = "gp2"
     volume_size = "${var.root_volume_size}" 
   }
+  
   # /var/lib/docker
   ebs_block_device = {
     device_name = "/dev/sdb"

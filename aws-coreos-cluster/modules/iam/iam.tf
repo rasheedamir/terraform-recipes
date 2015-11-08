@@ -1,13 +1,16 @@
 # deployment user for elb registrations etc.
+
 resource "aws_iam_user" "deployment" {
     name = "${var.deployment_user}"
     path = "/system/"
 }
+
 resource "aws_iam_user_policy" "deployment" {
     name = "deployment"
     user = "${aws_iam_user.deployment.name}"
     policy = "${file(\"policies/deployment_policy.json\")}"
 }
+
 resource "aws_iam_access_key" "deployment" {
     user = "${aws_iam_user.deployment.name}"
 
@@ -24,6 +27,7 @@ cat > "${var.cloud_config_file_path}" <<EOF
         AWS_ACCOUNT=${var.aws_account_id}
         AWS_DEFAULT_REGION=${var.aws_account_region}
         CLUSTER_NAME=${var.cluster_name}
+
   - path: /root/.aws/envvars
     permissions: 0600
     owner: root
@@ -33,6 +37,7 @@ cat > "${var.cloud_config_file_path}" <<EOF
         AWS_ACCESS_KEY_ID="${aws_iam_access_key.deployment.id}"
         AWS_SECRET_ACCESS_KEY=${aws_iam_access_key.deployment.secret}
         AWS_DEFAULT_REGION=${var.aws_account_region}
+        
   - path: /root/.aws/config
     permissions: 0600
     owner: root

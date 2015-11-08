@@ -15,6 +15,7 @@ resource "aws_s3_bucket" "cloudinit" {
         Name = "Cloudinit"
     }
 }
+
 # s3 bucket for application configuration, code, units etcd. Shared by all cluster nodes
 resource "aws_s3_bucket" "config" {
     bucket = "${var.bucket_prefix}-config"

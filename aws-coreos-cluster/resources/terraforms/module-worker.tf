@@ -6,6 +6,7 @@ module "worker" {
     root_volume_size =  8
     docker_volume_size =  12
     keypair = "worker"
+    # TODO: ONLY ALLOW FROM BASTION HOST! THIS IS SECURITY HOLE.
     allow_ssh_cidr="0.0.0.0/0"
 
     # aws
