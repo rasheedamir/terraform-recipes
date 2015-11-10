@@ -8,7 +8,6 @@ resource "aws_route53_zone" "public" {
     tags {
         Name = "${var.public_domain}"
     }
-
 }
 
 resource "aws_route53_zone" "private" {
@@ -24,4 +23,3 @@ resource "aws_route53_zone" "private" {
 output "private_zone_id" {value = "${aws_route53_zone.private.zone_id}" }
 output "public_domain" { value = "${var.public_domain}" }
 output "private_domain" {value = "${var.private_domain}" }
-

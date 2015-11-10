@@ -63,8 +63,10 @@ resource "aws_security_group" "allow_bastion" {
 }
 
 resource "aws_instance" "bastion" {
+
     connection {
         user = "ec2-user"
+        //user     = "ubuntu"
         // Path to your private key to use to connect with the instance over ssh
         key_file = "${module.ssh_keys.private_key_path}"
     }
@@ -103,7 +105,18 @@ resource "aws_instance" "bastion" {
     
     source_dest_check = false
     
-    // user_data = "${file(\"files/bastion/cloud-init.txt\")}"
+    //user_data = "${file(\"../files/bastion/cloud-init.txt\")}"
+
+    // The first remote-exec provisioner is used to wait for cloud-init (which is
+    // an AWS-EC2-specific thing) to finish. Without this line, Terraform may try
+    // to provision the instance before apt has updated all its sources. This is
+    // an implementation detail of an operating system and the way it runs on the
+    // cloud platform; this is not a Terraform bug.
+    provisioner "remote-exec" {
+        inline = [
+          "while [ ! -f /var/lib/cloud/instance/boot-finished ]; do sleep 1; done"
+        ]
+    }
 
     tags = {
         Name = "terraform-stack-bastion"

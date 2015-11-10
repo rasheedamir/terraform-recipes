@@ -59,6 +59,7 @@ resource "aws_route53_record" "private-dockerhub" {
     evaluate_target_health = true
   }
 }
+
 resource "aws_route53_record" "public-dockerhub" {
   zone_id = "${var.route53_public_zone_id}"
   name = "dockerhub"
@@ -75,4 +76,3 @@ resource "aws_route53_record" "public-dockerhub" {
 output "dockerhub_elb_id" {
     value = "${aws_elb.dockerhub.id}"
 }
-

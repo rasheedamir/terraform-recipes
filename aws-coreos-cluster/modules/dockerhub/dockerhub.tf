@@ -1,6 +1,7 @@
 #
 # Dockerhub autoscale group configurations
 #
+
 resource "aws_autoscaling_group" "dockerhub" {
   name = "dockerhub"
   availability_zones = [ "${var.dockerhub_subnet_az_a}", "${var.dockerhub_subnet_az_b}", "${var.dockerhub_subnet_az_c}"]
@@ -20,14 +21,21 @@ resource "aws_autoscaling_group" "dockerhub" {
     propagate_at_launch = true
   }
 }
+
 resource "aws_launch_configuration" "dockerhub" {
   # use system generated name to allow changes of launch_configuration
   # name = "workder-${var.ami}"
+
   image_id = "${var.ami}"
+
   instance_type = "${var.image_type}"
+
   iam_instance_profile = "${aws_iam_instance_profile.dockerhub.name}"
+
   security_groups = [ "${aws_security_group.dockerhub.id}" ]
+
   key_name = "${var.keypair}"
+
   lifecycle { create_before_destroy = true }
 
   # /root
@@ -35,6 +43,7 @@ resource "aws_launch_configuration" "dockerhub" {
     volume_type = "gp2"
     volume_size = "${var.root_volume_size}" 
   }
+
   # /var/lib/docker
   ebs_block_device = {
     device_name = "/dev/sdb"

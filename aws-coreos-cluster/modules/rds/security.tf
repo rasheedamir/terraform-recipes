@@ -18,6 +18,7 @@ resource "aws_security_group" "rds"  {
       protocol = "tcp"
       cidr_blocks = ["${var.vpc_cidr}" ]
     }
+    
     # Allow PostgresSQL access
     ingress {
       from_port = 5432

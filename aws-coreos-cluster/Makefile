@@ -9,9 +9,10 @@ CLUSTER_NAME := coreos-cluster
 #ALLOWED_ACCOUNT_IDS := "123456789012","012345678901"
 
 # For get-ami.sh
-COREOS_UPDATE_CHANNE=beta
-AWS_REGION=us-west-2
-VM_TYPE=hvm
+COREOS_UPDATE_CHANNE=stable
+AWS_REGION=eu-west-1
+## hvm/pv - note: t1.micro supports only pv type
+VM_TYPE=pv
 
 # Working Directories
 ROOT_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))

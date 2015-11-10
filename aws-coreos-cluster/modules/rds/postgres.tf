@@ -5,6 +5,7 @@ resource "aws_db_subnet_group" "coreos_cluster" {
 }
 
 resource "aws_db_instance" "coreos_cluster" {
+
     identifier = "coreos-cluster"
     allocated_storage = 10
     engine = "postgres"

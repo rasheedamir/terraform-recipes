@@ -5,6 +5,7 @@
 // RDS Instance Variables
 
 variable "rds_instance_name" {}
+
 variable "rds_is_multi_az" {
     default = "false"
 }
@@ -17,6 +18,7 @@ variable "rds_allocated_storage" {
     description = "The allocated storage in GBs"
     // You just give it the number, e.g. 10
 }
+
 variable "rds_engine_type" {
     // Valid types are
     // - mysql
@@ -41,6 +43,7 @@ variable "database_name" {
 }
 
 variable "database_user" {}
+
 variable "database_password" {}
 
 variable "rds_security_group_id" {}

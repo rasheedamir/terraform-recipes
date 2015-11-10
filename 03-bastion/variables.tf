@@ -8,6 +8,7 @@
 
 variable "allowed_network" {
     description = "The CIDR of network that is allowed to access the bastion host"
+    default = "192.168.1.0/24"
 }
 
 // This stanza declares the provider we are declaring the AWS region we want
